@@ -4,4 +4,5 @@ import java.util.Optional;
 
 public interface Calculator {
     Optional<String> calculate(String a, String b, String operand);
+    boolean isValid(String a, String b);
 }

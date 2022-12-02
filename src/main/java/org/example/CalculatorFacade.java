@@ -35,10 +35,13 @@ public class CalculatorFacade implements CalculatorApp {
         String b = validate.get(2);
         String operand = validate.get(1);
 
-        Optional<String> composed = arabianCalculator
-                .calculate(a, b, operand)
-                .or(() -> romanCalculator.calculate(a, b, operand));
+        Optional<String> result;
+        if (arabianCalculator.isValid(a, b)){
+            result = arabianCalculator.calculate(a, b, operand);
+        } else {
+            result = romanCalculator.calculate(a,b, operand);
+        }
 
-        return composed.orElseThrow(Exception::new);
+        return result.orElseThrow(Exception::new);
     }
 }

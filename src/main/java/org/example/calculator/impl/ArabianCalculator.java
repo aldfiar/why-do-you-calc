@@ -23,9 +23,22 @@ public class ArabianCalculator extends AbstractCalculator<Integer> {
             int second = Integer.parseInt(b);
             result = function.apply(first, second);
         } catch (NumberFormatException ex) {
-            logger.error(String.format("Can't format values: %s, %s", a, b));
+            logger.warn(String.format("Can't format values: %s, %s", a, b));
         }
 
         return Optional.ofNullable(result).map(String::valueOf);
+    }
+
+    @Override
+    public boolean isValid(String a, String b) {
+        boolean valid = false;
+        try {
+            int first = Integer.parseInt(a);
+            int second = Integer.parseInt(b);
+            valid = true;
+        } catch (NumberFormatException ex) {
+            logger.warn(String.format("Can't format values: %s, %s", a, b));
+        }
+        return valid;
     }
 }
